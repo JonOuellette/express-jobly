@@ -11,6 +11,7 @@ const Company = require("../models/company");
 
 const companyNewSchema = require("../schemas/companyNew.json");
 const companyUpdateSchema = require("../schemas/companyUpdate.json");
+const companySearchSchema = require("../schemas/companySearchSchema")
 
 const router = new express.Router();
 
@@ -68,7 +69,7 @@ router.get("/", async function (req, res, next) {
     let error = new BadRequestError(listOfErrors);
     return next(error)
   }
-    const companies = await Company.findAll();
+    const companies = await Company.findAll(q);
     return res.json({ companies });
   } catch (err) {
     return next(err);
